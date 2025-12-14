@@ -2424,7 +2424,7 @@
       const vO11 = {
         tags: ["FullInvoice", "SignatureRequired"],
         document: {
-          documentType: "EI",
+          documentType: "I",
           documentTypeVersion: "1.0",
           dateTimeIssued:
             firstLine.dateTimeIssued &&
@@ -4000,7 +4000,7 @@
       vLN017 += vParseFloat9;
       return {
         internalCode: String(p199.internalCode || p199.itemCode),
-        description: fn_f120(String(p199.description), 500).padEnd(5, " "),
+        description: fn_f120(String(p199.description), 100).padEnd(5, " "),
         itemType: String(p199.itemType || "EGS"),
         itemCode: String(p199.itemCode),
         unitType: String(p199.unitType || "EA"),
@@ -5346,7 +5346,7 @@
         }
         const vParseFloat19 = parseFloat((vParseFloat16 + vLN026).toFixed(5));
         return {
-          description: fn_f120(vVF17.item_description, 500),
+          description: fn_f120(vVF17.item_description, 100),
           itemType: vVF17.item_type,
           itemCode: vVF17.item_code,
           unitType: vVF17.unit_type,
@@ -5911,8 +5911,6 @@
         item_internal_code: p296.internalCode,
         unit_type: p296.unitType,
         quantity: p296.quantity,
-        weightUnitType:"kgm",
-        weightQuantity:0.001,
         unit_price: p296.unitValue.amountEGP,
         currency_sold: p296.unitValue.currencySold,
         exchange_rate: p296.unitValue.currencyExchangeRate,
@@ -7679,7 +7677,7 @@
     const vO48 = {
       tags: ["FullInvoice", "SignatureRequired"],
       document: {
-        documentType: "EI",
+        documentType: "I",
         documentTypeVersion: "1.0",
         dateTimeIssued:
           firstLine.dateTimeIssued && !isNaN(new Date(firstLine.dateTimeIssued))
@@ -8227,8 +8225,6 @@
         item_internal_code: p408.internalCode,
         unit_type: p408.unitType,
         quantity: p408.quantity,
-        weightUnitType:"kgm",
-        weightQuantity:0.001,
         unit_price: p408.unitValue.amountEGP,
         currency_sold: p408.unitValue.currencySold,
         exchange_rate: p408.unitValue.currencyExchangeRate,
@@ -8686,17 +8682,6 @@
       return v830.join("\n");
     }
     try {
-        console.log('Creating draft with payload:', p425); // Debug log
-
-if(p425.document.documentType === "EI") 
-{
-            p425.document.invoiceLines.forEach((line, index) => {
-            line.weightUnitType = "kgm";
-            line.weightQuantity = 0.001;
-        });
-}
-        console.log('Modified payload with weight info:', p425); // Debug log
-
       const v837 = await fetch(
         "https://api-portal.invoicing.eta.gov.eg/api/v1/documents/drafts",
         {
@@ -10745,7 +10730,7 @@ if(p425.document.documentType === "EI")
       return {
         description: fn_f120(
           p475.item_description || p475.item_code_name || p475.item_code,
-          500
+          100
         ),
         itemType: p475.item_type,
         itemCode: p475.item_code,
@@ -10815,7 +10800,7 @@ if(p425.document.documentType === "EI")
             : v900.receiver_id,
         name: fn_f120(v900.receiver_name),
       },
-      documentType: "EI",
+      documentType: "I",
       documentTypeVersion: v925,
       dateTimeIssued: v905,
       taxpayerActivityCode: v904,
@@ -11486,7 +11471,7 @@ if(p425.document.documentType === "EI")
       vLN050 += vParseFloat46;
       return {
         internalCode: String(p521.internalCode || p521.itemCode),
-        description: fn_f120(String(p521.description), 500),
+        description: fn_f120(String(p521.description), 100),
         itemType: String(p521.itemType || "EGS"),
         itemCode: String(p521.itemCode),
         unitType: String(p521.unitType || "EA"),
